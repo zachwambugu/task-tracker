@@ -1,4 +1,5 @@
 import sys
+import json
 
 # Task manager to store and manage tasks
 tasks = []
@@ -19,6 +20,22 @@ def add_task():
     task = {"name": task_name, "status": "Pending"}
     tasks.append(task)
     print(f"Task '{task_name}' added successfully!")
+
+# to save the tasks in a file
+def save_tasks():
+    with open("tasks.json", "w") as file:
+        json.dump(tasks, file)
+    print("Tasks saved successfully!")
+
+def load_tasks():
+    global tasks
+    try:
+        with open("tasks.json", "r") as file:
+            tasks = json.load(file)
+        print("Tasks loaded successfully!")
+    except (FileNotFoundError, json.JSONDecodeError):
+        tasks = []
+
 
 # Function to list all tasks
 def list_tasks():
@@ -75,8 +92,10 @@ def mark_task_completed():
     except ValueError:
         print("Please enter a valid number.")
 
+    
 # Main function to handle user input
 def main():
+    load_tasks()
     while True:
         show_menu()
         try:
@@ -92,6 +111,7 @@ def main():
             elif choice == 5:
                 mark_task_completed()
             elif choice == 6:
+                save_tasks()
                 print("Exiting... Goodbye!")
                 sys.exit()
             else:
