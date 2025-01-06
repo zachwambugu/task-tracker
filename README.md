@@ -1,4 +1,4 @@
-# TASK TRACKE
+# TASK TRACKEr
 This program lists tasks, showing their progress status. Provides a platform to  edit and modify tasks giving their tasks.
 
 # technologies used
